@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UsersComponent } from './users.component';
+import { MyBootstrapModalComponent } from './my-bootstrap-modal.component';
 
-describe('UsersComponent', () => {
-  let component: UsersComponent;
-  let fixture: ComponentFixture<UsersComponent>;
+describe('MyBootstrapModalComponent', () => {
+  let component: MyBootstrapModalComponent;
+  let fixture: ComponentFixture<MyBootstrapModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UsersComponent ]
+      declarations: [ MyBootstrapModalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UsersComponent);
+    fixture = TestBed.createComponent(MyBootstrapModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

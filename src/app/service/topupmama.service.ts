@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import { Todo } from '../dashboard/users/users';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import {Observable} from 'rxjs';
 export class TopupmamaService {
 
   private baseUrl = `https://reqres.in/api/`;
-  private register = 'register'
+  private register = 'register';
+  private getUsers = 'users?page=2'
 
   loginCookie: any;
   jwt: any;
@@ -72,20 +74,24 @@ export class TopupmamaService {
   setAccessToken(accessToken: string) {
     localStorage.setItem('access_token', accessToken);
   }
+  getTodo(id: string): Observable<any> {
+    return this.http.get<Todo>(`${this.baseUrl}/${id}`);
+  }
 
-  // getNewAccessToken() {
-  //   return this.http.get(`${this.baseUrl + this._refreshToken}`, {
-  //     observe: 'response'
-  //   }).pipe(
-  //     tap((res: HttpResponse<any>) => {
-  //       this.setAccessToken(res.headers.get('access_token'));
+  createTodo(todo: Todo): Observable<Todo> {
+    return this.http.post<Todo>(`${this.baseUrl}`, todo);
+  }
 
-  //       console.log('new access token', res);
-  //     })
-  //   );
-  // }
+  updateTodo(id: string, value: Todo): Observable<object> {
+    return this.http.patch<Todo>(`${this.baseUrl}/${id}`, value);
+  }
 
-  // refreshAccessToken(data: any) {
-  //   return this.http.post(`${this.baseUrl + this._refreshToken}`, data);
-  // }
+  deleteTodo(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
+  }
+
+  // Get all Todos
+  getTodoList(): Observable<any> {
+    return this.http.get<Todo[]>(`${this.baseUrl + this.getUsers}`);
+  }
 }
