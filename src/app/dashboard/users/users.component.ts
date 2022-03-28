@@ -8,6 +8,7 @@ import { Todo } from './users';
 import { NgbdSortableHeader, SortEvent } from './table-complete/sortable.directive';
 import { MyBootstrapModalComponent } from '../my-bootstrap-modal/my-bootstrap-modal.component';
 import { UpdateUserComponent } from '../update-user/update-user.component';
+import { AlertService } from '../../components/alert/alert.service';
 
 @Component({
   selector: 'app-users',
@@ -29,7 +30,8 @@ export class UsersComponent implements OnInit {
     public tableService: TableService,
     public updateTodoComponent: UpdateUserComponent,
     public myBootstrapModalCoomponent: MyBootstrapModalComponent,
-    private ref: ChangeDetectorRef)
+    private ref: ChangeDetectorRef,
+    private alertService: AlertService)
      {
     this.todos$ = this.tableService.todos$;
     this.total$ = this.tableService.total$;
@@ -66,9 +68,10 @@ export class UsersComponent implements OnInit {
 
     submitButton.className = 'btn btn-success';
     submitButton.setAttribute('id', 'list-button');
-    submitButton.innerText = 'Submit';
-    // document.getElementById('modal-footer').appendChild(submitButton)? ;
-    // document.getElementById('list-button').setAttribute('type', 'button');
+    submitButton.innerText = 'Delete';
+
+    document.getElementById('modal-footer')!.appendChild(submitButton);
+    document.getElementById('list-button')!.setAttribute('type', 'button');
     // must be arrow function because: 'In arrow function this always point to the context it is called from.'
     submitButton.onclick = () => {
       this.deleteTodo(id);
@@ -86,15 +89,15 @@ export class UsersComponent implements OnInit {
           // Get data length
         }
         console.log('array at page load: ' + this.tableService.todoArray.length);
-      }, error => console.log(error));
+      }, error => this.alertService.error(error));
   }
 
   deleteTodo(id: any) {
-    this.todoService.deleteTodo(id)
+    this.todoService.deleteUser(id)
       .subscribe(todo => {
         console.log(todo); // print message from server
       },
-        error => console.log(error)
+        error => this.alertService.error(error)
       );
     this.todos$.subscribe(todos => {
       for (let i = 0; i < todos.length; i++) {

@@ -18,6 +18,7 @@ export class TopupmamaService {
   private singleUserUpdate = 'users'
   private singleUserDelete = 'users'
   private _updateUser = 'users'
+  private _deleteUser = 'users'
   private userSubject!: BehaviorSubject<User>;
   public user!: Observable<User>;
 
@@ -94,8 +95,8 @@ export class TopupmamaService {
     return this.http.patch<Todo>(`${this.baseUrl+this._updateUser}/${id}`, value);
   }
 
-  deleteTodo(id: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
+  deleteUser(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl +this._deleteUser}/${id}`, { responseType: 'text' });
   }
 
   // Get all Todos
