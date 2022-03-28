@@ -1,0 +1,66 @@
+<form>
+    <div class="form-group form-inline">
+        <input [(ngModel)]="tableService.searchTerm" class="form-control search-table" name="searchTerm" placeholder="Full text search" type="text" />
+        <span *ngIf="tableService.loading$ | async" class="ml-3">Loading...</span>
+    </div>
+
+    <table id="table" class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Photo</th>
+                <th (sort)="onSort($event)" scope="col" sortable="first_name">First Name</th>
+                <th (sort)="onSort($event)" scope="col" sortable="last_name">Last Name</th>
+                <th (sort)="onSort($event)" scope="col" sortable="email">Email</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let todo of todos$ | async;">
+                <!-- <th scope="row">{{ todo.id }}</th> -->
+                <td>
+                    <ngb-highlight [result]="''+todo.id" [term]="tableService.searchTerm"></ngb-highlight>
+                </td>
+                <td>
+                    <img [src]="todo.avatar" class="me-2" style="width: 20px">
+                </td>
+
+                <td>
+                    <ngb-highlight [result]="todo.first_name" [term]="tableService.searchTerm"></ngb-highlight>
+                </td>
+
+                <td>
+                    <ngb-highlight [result]="todo.last_name" [term]="tableService.searchTerm"></ngb-highlight>
+                </td>
+                <td>
+                    <ngb-highlight [result]="todo.email" [term]="tableService.searchTerm"></ngb-highlight>
+                </td>
+
+                <td>
+                    <div class="action-wrapper">
+                        <span (click)="openModalDelete(todo.id)" placement="top" ngbTooltip="Delete">
+                        <button class="btn btn-danger">Delete</button>
+            </span>
+                        <span class="ml-3" placement="top" ngbTooltip="Update">
+                          <button class="btn btn-btn btn-warning " [routerLink]="['update', todo.id]">Update</button>
+            </span>
+                        <span (click)="todoDetails(todo.id)" class="ml-3" placement="top" ngbTooltip="Details">
+                          <button class="btn btn-dark" [routerLink]="['details', todo.id]">Details</button>
+            </span>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between">
+        <ngb-pagination [(page)]="tableService.page" [collectionSize]="(tableService.total$ | async)!" [pageSize]="tableService.pageSize">
+        </ngb-pagination>
+
+        <select [(ngModel)]="tableService.pageSize" class="custom-select" name="pageSize" style="width: auto">
+      <option [ngValue]="5">5 users per page</option>
+      <option [ngValue]="10">10 users per page</option>
+      <option [ngValue]="15">15 users per page</option>
+    </select>
+    </div>
+</form>

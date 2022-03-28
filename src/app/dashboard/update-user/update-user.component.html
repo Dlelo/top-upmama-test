@@ -1,0 +1,20 @@
+<div class="container">
+    <h3 class="mt-3">Update User</h3>
+
+    <div class="card" style="width: 442px;">
+        <div class="card-body">
+            <form (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input formControlName="name" class="form-control" id="name" name="name" required type="text">
+                </div>
+
+                <div class="form-group">
+                    <label for="job">Job</label>
+                    <input formControlName="job" class="form-control" id="job" name="job" required type="text">
+                </div>
+                <button class="btn btn-success float-right m-1" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
