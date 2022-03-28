@@ -34,7 +34,7 @@ export default class RegisterComponent implements OnInit {
         email:['', [Validators.required, Validators.email]],
         password:['', [
             Validators.compose([
-              Validators.minLength(6),
+              Validators.minLength(8),
               Validators.maxLength(40),
               Validators.required,
               // check whether the entered password has a number
