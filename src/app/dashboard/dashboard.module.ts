@@ -8,8 +8,9 @@ import { NgbModule, NgbPaginationModule, NgbActiveModal } from '@ng-bootstrap/ng
 import { UsersComponent } from './users/users.component';
 import { NgbdSortableHeader } from './users/table-complete/sortable.directive';
 import { UpdateUserComponent } from './update-user/update-user.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyBootstrapModalComponent } from './my-bootstrap-modal/my-bootstrap-modal.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { MyBootstrapModalComponent } from './my-bootstrap-modal/my-bootstrap-mod
     NgbdSortableHeader,
     UpdateUserComponent,
     MyBootstrapModalComponent,
+    UserDetailsComponent,
 
 
   ],
@@ -29,6 +31,7 @@ import { MyBootstrapModalComponent } from './my-bootstrap-modal/my-bootstrap-mod
     FormsModule,
     NgbModule,
     NgbPaginationModule,
+    ReactiveFormsModule
   ],
   providers: [UpdateUserComponent, MyBootstrapModalComponent, NgbActiveModal,DecimalPipe],
   entryComponents: [MyBootstrapModalComponent],

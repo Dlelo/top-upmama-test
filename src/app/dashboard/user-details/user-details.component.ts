@@ -6,11 +6,12 @@ import { TopupmamaService } from '../../service/topupmama.service';
 import { Todo } from '../users/users';
 
 @Component({
-  selector: 'app-my-account',
-  templateUrl: './my-account.component.html',
-  styleUrls: ['./my-account.component.scss']
+  selector: 'app-user-details',
+  templateUrl: './user-details.component.html',
+  styleUrls: ['./user-details.component.scss']
 })
-export class MyAccountComponent implements OnInit {
+export class UserDetailsComponent implements OnInit {
+
   id!: string;
   todo!: Todo;
   userdetails!:any

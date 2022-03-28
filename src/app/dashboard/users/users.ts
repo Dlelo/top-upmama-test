@@ -7,5 +7,14 @@ export class Todo {
   first_name!: string;
   last_name!: string;
   email!: string;
-  avatar!: string
+  avatar!: string;
+  name!:string;
+  job!:string;
+}
+
+export class User {
+  id!: string;
+  password!: string;
+  email!: string;
+  token!: string;
 }

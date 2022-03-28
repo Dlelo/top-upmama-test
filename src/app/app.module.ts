@@ -7,18 +7,25 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { LandingModule } from './landing/landing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AlertModule } from './components/alert/alert.module';
+import { CookieModule } from 'ngx-cookie';
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
+    AlertModule,
     LandingModule,
     HttpClientModule,
     NgbModule,
+    CookieModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -51,7 +51,7 @@ export class UsersComponent implements OnInit {
     this.tableService.sortDirection = direction;
   }
 
-  openModalDelete(id: string) {
+  openModalDelete(id: any) {
     const submitButton: HTMLElement = document.createElement('button') as HTMLElement;
     const modalRef = this.modalService.open(MyBootstrapModalComponent,
       {
@@ -61,8 +61,8 @@ export class UsersComponent implements OnInit {
         // backdrop: 'static'
       });
 
-    modalRef.componentInstance.title = 'Delete Todo';
-    modalRef.componentInstance.body = 'Are you sure you want to delete this todo?';
+    modalRef.componentInstance.title = 'Delete User';
+    modalRef.componentInstance.body = 'Are you sure you want to delete this user?';
 
     submitButton.className = 'btn btn-success';
     submitButton.setAttribute('id', 'list-button');
@@ -89,7 +89,7 @@ export class UsersComponent implements OnInit {
       }, error => console.log(error));
   }
 
-  deleteTodo(id: string) {
+  deleteTodo(id: any) {
     this.todoService.deleteTodo(id)
       .subscribe(todo => {
         console.log(todo); // print message from server
@@ -107,11 +107,11 @@ export class UsersComponent implements OnInit {
     this.modalService.dismissAll();
   }
 
-  todoDetails(id: string) {
-    this.router.navigate(['details', id]);
+  todoDetails(id: any) {
+    this.router.navigate(['/dashboard/details', id]);
   }
 
-  updateTodo(id: string) {
-    this.router.navigate(['update', id]);
+  updateTodo(id: any) {
+    this.router.navigate(['/dashboard/update', id]);
   }
 }

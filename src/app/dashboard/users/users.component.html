@@ -38,14 +38,14 @@
 
                 <td>
                     <div class="action-wrapper">
-                        <span (click)="openModalDelete(todo._id)" placement="top" ngbTooltip="Delete">
+                        <span (click)="openModalDelete(todo.id)" placement="top" ngbTooltip="Delete">
                         <button class="btn btn-danger">Delete</button>
             </span>
-                        <span (click)="updateTodo(todo._id)" class="ml-3" placement="top" ngbTooltip="Update">
-                          <button class="btn btn-btn btn-warning">Update</button>
+                        <span class="ml-3" placement="top" ngbTooltip="Update">
+                          <button class="btn btn-btn btn-warning " [routerLink]="['update', todo.id]">Update</button>
             </span>
-                        <span (click)="todoDetails(todo._id)" class="ml-3" placement="top" ngbTooltip="Details">
-                          <button class="btn btn-dark">Details</button>
+                        <span (click)="todoDetails(todo.id)" class="ml-3" placement="top" ngbTooltip="Details">
+                          <button class="btn btn-dark" [routerLink]="['details', todo.id]">Details</button>
             </span>
                     </div>
                 </td>

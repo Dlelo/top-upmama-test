@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ValidationErrors, ValidatorFn, AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { Router, ActivatedRoute } from '@angular/router';
+import { first } from 'rxjs/operators';
+import { AlertService } from './../../components/alert/alert.service';
+import {TopupmamaService } from '../../service/topupmama.service';
 
 @Component({
   selector: 'app-register',
@@ -9,13 +12,21 @@ import { ValidationErrors, ValidatorFn, AbstractControl, FormBuilder, FormContro
 })
 export default class RegisterComponent implements OnInit {
   submitted = false;
+  loading = false;
 
   registerForm: FormGroup = new FormGroup({
   email: new FormControl(''),
   password: new FormControl(''),
 });
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+        private router: Router,
+        private accountService: TopupmamaService,
+        private alertService: AlertService
+
+    ) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group(
@@ -63,6 +74,19 @@ export default class RegisterComponent implements OnInit {
       return;
     }
     console.log(JSON.stringify(this.registerForm.value, null, 2));
+    this.loading = true;
+        this.accountService. registerUser(this.registerForm.value.email, this.registerForm.value.password )
+            .pipe(first())
+            .subscribe({
+                next: () => {
+                    this.alertService.success('Registration successful', { keepAfterRouteChange: true });
+                    this.router.navigate(['../login'], { relativeTo: this.route });
+                },
+                error: error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                }
+         });
   }
   onReset(): void {
     this.submitted = false;

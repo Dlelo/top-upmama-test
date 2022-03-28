@@ -10,3 +10,16 @@ html {
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.landing-home {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+}
+
+.get-all {
+    background: 0 -8px;
+    background-image: linear-gradient( 180deg, rgba(255, 255, 255, 0) 50%, #ED3833 0%);
+    border-top-left-radius: 0.7em;
+    border-bottom-right-radius: 0.1em;
+}
