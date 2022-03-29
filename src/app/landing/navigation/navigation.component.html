@@ -4,8 +4,8 @@
   <span class="navbar-toggler-icon"></span>
 </button>
 
-    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-between">
-        <div class="navbar-nav">
+    <div id="navbarCollapse" class="collapse navbar-collapse justify-content-evenly ">
+        <div class="navbar-nav  action-buttons ml-auto justify-content-start" *ngIf="loggedIn()">
             <a href="" class="nav-item nav-link" routerLink="/dashboard/account">My account</a>
             <a href="" class="nav-item nav-link" routerLink="/dashboard/users">Users</a>
 
@@ -13,8 +13,9 @@
 
         <div class="navbar-nav action-buttons ml-auto justify-content-end">
 
-            <a href="#" class="btn btn-outline-success mr-1" routerLink="/login">Login</a>
-            <a href="#" class="btn btn-success" routerLink="/register">Register</a>
+            <a *ngIf="!loggedIn()" href="#" class="btn btn-outline-success mr-1" routerLink="/login">Login</a>
+            <a *ngIf="!loggedIn()" href="#" class="btn btn-success mr-1" routerLink="/register">Register</a>
+            <a *ngIf="loggedIn()" href="#" class="btn btn-outline-danger mr-1" (click)="logoutUser()">Logout</a>
         </div>
     </div>
 </nav>

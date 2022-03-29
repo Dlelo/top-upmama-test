@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TopupmamaService } from 'src/app/service/topupmama.service';
+import { TopupmamaService } from '../../service/topupmama.service';
 
 
 @Component({

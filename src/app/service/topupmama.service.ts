@@ -4,6 +4,9 @@ import {Router} from '@angular/router';
 import {map, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { Todo, User } from '../dashboard/users/users';
+import { CookieService } from 'ngx-cookie';
+import * as jwt_decode from 'jwt-decode';
+import Cookies from 'js-cookie'
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +33,8 @@ export class TopupmamaService {
   current_time:any;
 
   constructor(private http: HttpClient,
-              private _router: Router) {
+              private _router: Router,
+              private cookiesService:CookieService) {
 
     // this.access_token = localStorage.getItem('access_token');
     // this.refresh_token = localStorage.getItem('refresh_token');
@@ -50,7 +54,7 @@ export class TopupmamaService {
   // logout
   logoutUser(): void {
     localStorage.clear();
-    this._router.navigate(['/home']);
+    this._router.navigate(['/login']);
   }
 
   // get refresh token
@@ -60,20 +64,19 @@ export class TopupmamaService {
 
   // check if the user is logged in
   loggedIn(): boolean {
-    this.loginCookie = localStorage.getItem('loginStatus');
-    if (this.loginCookie === '1') {
-      if (localStorage.getItem('jwt') === null || localStorage.getItem('jwt') === undefined) {
+    this.loginCookie = localStorage.getItem('user');
+      if (localStorage.getItem('user') === null || localStorage.getItem('user') === undefined) {
         return false;
       }else {
         return true;
       }
     }
-    return false;
-  }
+
+
 
 
   getAccessToken() {
-    return localStorage.getItem('access_token');
+    return this.cookiesService.getAll();
   }
 
   getRefreshToken() {
@@ -110,7 +113,9 @@ export class TopupmamaService {
 login(username: any, password: any) {
     return this.http.post<User>(`${this.baseUrl+this._login}`, { username, password })
         .pipe(map(user => {
+          this.jwt = this.cookiesService.get('OursiteJWT')
             // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem('jwt', JSON.stringify(this.jwt));
             localStorage.setItem('user', JSON.stringify(user));
             this.userSubject.next(user);
             return user;
@@ -119,7 +124,8 @@ login(username: any, password: any) {
 
 logout() {
     // remove user from local storage and set current user to null
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    Cookies.remove('OursiteJWT');
     //this.userSubject.next(null);
     this._router.navigate(['/login']);
 }

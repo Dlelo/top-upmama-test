@@ -9,6 +9,7 @@ import { LandingModule } from './landing/landing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AlertModule } from './components/alert/alert.module';
 import { CookieModule } from 'ngx-cookie';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -27,7 +28,7 @@ import { CookieModule } from 'ngx-cookie';
     NgbModule,
     CookieModule.forRoot()
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
