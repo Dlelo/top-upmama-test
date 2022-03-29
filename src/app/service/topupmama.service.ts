@@ -5,8 +5,7 @@ import {map, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 import { Todo, User } from '../dashboard/users/users';
 import { CookieService } from 'ngx-cookie';
-import * as jwt_decode from 'jwt-decode';
-import Cookies from 'js-cookie'
+
 
 @Injectable({
   providedIn: 'root'
@@ -125,7 +124,7 @@ login(username: any, password: any) {
 logout() {
     // remove user from local storage and set current user to null
     localStorage.removeItem('token');
-    Cookies.remove('OursiteJWT');
+
     //this.userSubject.next(null);
     this._router.navigate(['/login']);
 }
